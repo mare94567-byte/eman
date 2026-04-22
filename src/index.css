@@ -1,0 +1,65 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Inter", "system-ui", "sans-serif";
+  --color-blue-50: #eff6ff;
+  --color-blue-100: #dbeafe;
+  --color-blue-200: #bfdbfe;
+  --color-blue-300: #93c5fd;
+  --color-blue-400: #60a5fa;
+  --color-blue-500: #3b82f6;
+  --color-blue-600: #2563eb;
+  --color-blue-700: #1d4ed8;
+  --color-blue-800: #1e40af;
+  --color-blue-900: #1e3a8a;
+  --color-blue-950: #172554;
+
+  /* Theme-aware overrides */
+  --color-zinc-950: var(--bg-main);
+  --color-zinc-900: var(--bg-surface);
+  --color-zinc-800: var(--bg-element);
+  --color-zinc-100: var(--text-secondary);
+  --color-zinc-400: var(--text-muted);
+  --color-base-text: var(--text-main);
+}
+
+:root {
+  --bg-main: #ffffff;
+  --bg-surface: #f8fafc;
+  --bg-element: #f1f5f9;
+  --text-main: #0f172a;
+  --text-secondary: #334155;
+  --text-muted: #64748b;
+}
+
+.dark {
+  --bg-main: #09090b;
+  --bg-surface: #18181b;
+  --bg-element: #27272a;
+  --text-main: #ffffff;
+  --text-secondary: #f4f4f5;
+  --text-muted: #a1a1aa;
+}
+
+@layer base {
+  body {
+    background-color: var(--bg-main);
+    color: var(--text-main);
+  }
+}
+
+.custom-scrollbar::-webkit-scrollbar {
+  width: 6px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+  @apply bg-zinc-900;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  @apply bg-zinc-700 rounded-full hover:bg-blue-600 transition-colors;
+}
+
+* {
+  @apply border-zinc-900;
+}

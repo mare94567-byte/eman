@@ -1,0 +1,95 @@
+{
+  "entities": {
+    "Manga": {
+      "title": "Manga",
+      "description": "Details of a manga or manhua",
+      "type": "object",
+      "properties": {
+        "title": { "type": "string" },
+        "author": { "type": "string" },
+        "description": { "type": "string" },
+        "coverUrl": { "type": "string" },
+        "creatorId": { "type": "string" },
+        "creatorName": { "type": "string" },
+        "createdAt": { "type": "string", "format": "date-time" },
+        "views": { "type": "number" },
+        "likes": { "type": "number" },
+        "otherNames": { "type": "string" }
+      },
+      "required": ["title", "author", "description", "coverUrl", "creatorId"]
+    },
+    "Chapter": {
+      "title": "Chapter",
+      "description": "A single chapter of a manga",
+      "type": "object",
+      "properties": {
+        "title": { "type": "string" },
+        "number": { "type": "number" },
+        "images": { 
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["title", "number", "images"]
+    },
+    "Comment": {
+      "title": "Comment",
+      "description": "User comment on a manga",
+      "type": "object",
+      "properties": {
+        "userId": { "type": "string" },
+        "userName": { "type": "string" },
+        "userAvatar": { "type": "string" },
+        "text": { "type": "string" },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["userId", "userName", "text"]
+    },
+    "UserProfile": {
+      "title": "User Profile",
+      "description": "User specific data like library",
+      "type": "object",
+      "properties": {
+        "library": {
+          "type": "object",
+          "properties": {
+            "readLater": { "type": "array", "items": { "type": "string" } },
+            "readingNow": { "type": "array", "items": { "type": "string" } },
+            "favorites": { "type": "array", "items": { "type": "string" } }
+          }
+        }
+      }
+    }
+  },
+  "firestore": {
+    "/mangas/{mangaId}": {
+      "schema": "Manga",
+      "description": "Collection of available mangas"
+    },
+    "/mangas/{mangaId}/chapters/{chapterId}": {
+      "schema": "Chapter",
+      "description": "Chapters within a manga"
+    },
+    "/mangas/{mangaId}/chapters/{chapterId}/comments/{commentId}": {
+      "schema": "Comment",
+      "description": "Comments on a chapter"
+    },
+    "/mangas/{mangaId}/chapters/{chapterId}/reactions/{reactionId}": {
+      "schema": "object",
+      "description": "User reactions to a chapter"
+    },
+    "/mangas/{mangaId}/comments/{commentId}": {
+      "schema": "Comment",
+      "description": "Comments on a manga"
+    },
+    "/users/{userId}": {
+      "schema": "UserProfile",
+      "description": "User library and profile data"
+    },
+    "/users/{userId}/history/{historyId}": {
+      "schema": "object",
+      "description": "Reading history entries"
+    }
+  }
+}
